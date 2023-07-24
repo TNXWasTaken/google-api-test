@@ -3,29 +3,30 @@
 <html>
 <body>
 
-<meta name="google-signin-client_id" content="536806687185-klhpabq1s9ucqjegpd8t0naa7rsptdsq.apps.googleusercontent.com">
-<script src="https://apis.google.com/js/platform.js" async defer></script>
-<div class="g-signin2" data-onsuccess="onSignIn"></div>
-<a href="#" onclick="signOut();">Sign out</a>
-<p id="ID"></p>
-<p id="Name"></p>
-<p id="Image URL"></p>
-<p id="Email"></p>
+<meta name="google-signin-client_id" content="536806687185-klhpabq1s9ucqjegpd8t0naa7rsptdsq.apps.googleusercontent.com">  
+<div class="google-signin"</div>
+
 <script>
-  function onSignIn(googleUser) {
-    var profile = googleUser.getBasicProfile();
-    document.getElementById('ID').innerHTML = profile.getId();
-    document.getElementById('Name').innerHTML = profile.getName();
-    document.getElementById('Image URL').innerHTML = profile.getImageUrl();
-    document.getElementById('Email').innerHTML = profile.getEmail();
+  function onSuccess(googleUser) {
+    console.log('Logged in as: ' + googleUser.getBasicProfile().getName());
   }
-  
-  function signOut() {
-    var auth2 = gapi.auth2.getAuthInstance();
-    auth2.signOut().then(function () {
-      console.log('User signed out.');
+  function onFailure(error) {
+    console.log(error);
+  }
+  function renderButton() {
+    consile.log('render button');
+    gapi.signin2.render('google-signin', {
+      'scope': 'profile email',
+      'width': 240,
+      'height': 50,
+      'longtitle': true,
+      'theme': 'dark',
+      'onsuccess': onSuccess,
+      'onfailure': onFailure
     });
   }
 </script>
+<script src="https://apis.google.com/js/platform.js?onload=renderButton" async defer></script>
+  
 </body>
 </html> 
