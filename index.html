@@ -2,27 +2,29 @@
 <!DOCTYPE html>
 <html>
   <body>
-    <meta Content-Security-Policy-Report-Only: script-src
-          https://accounts.google.com/gsi/client; frame-src
-          https://accounts.google.com/gsi/; connect-src
-          https://accounts.google.com/gsi/; />
     <script src="https://accounts.google.com/gsi/client" async defer></script>
     <div id="g_id_onload"
          data-client_id="536806687185-klhpabq1s9ucqjegpd8t0naa7rsptdsq.apps.googleusercontent.com"
          data-callback="handleCredentialResponse">
     </div>
     <div class="g_id_signin" data-type="standard"></div>
+    <img id="Picture" src="">
+    <p id="ID"></p>
+    <p id="Full Name"></p>
+    <p id="Given Name"></p>
+    <p id="Family Name"></p>
+    <p id="Email"></p>
 
     <script src="https://unpkg.com/jwt-decode/build/jwt-decode.js"></script>
     <script>
       function handleCredentialResponse(response) {
         responsePayload = window.jwt_decode(response.credential);
-        console.log("ID: " + responsePayload.sub);
-        console.log('Full Name: ' + responsePayload.name);
-        console.log('Given Name: ' + responsePayload.given_name);
-        console.log('Family Name: ' + responsePayload.family_name);
-        console.log("Image URL: " + responsePayload.picture);
-        console.log("Email: " + responsePayload.email);
+        document.getElementById("Picture").src = responsePayload.picture;
+        document.getElementById("ID").innerHTML = responsePayload.sub;
+        document.getElementById("Full Name").innerHTML = responsePayload.name;
+        document.getElementById("Given Name").innerHTML = responsePayload.given_name;
+        document.getElementById("Family Name").innerHTML = responsePayload.family_name;
+        document.getElementById("Email").innerHTML = responsePayload.email;
     }
     </script>
   
