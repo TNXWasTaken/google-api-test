@@ -12,7 +12,7 @@
     <script src="https://unpkg.com/jwt-decode/build/jwt-decode.js"></script>
     <script>
       function handleCredentialResponse(response) {
-        responsePayload = jwtDecode(response.credential);
+        responsePayload = window.jwt_decode(response.credential);
         console.log("ID: " + responsePayload.sub);
         console.log('Full Name: ' + responsePayload.name);
         console.log('Given Name: ' + responsePayload.given_name);
